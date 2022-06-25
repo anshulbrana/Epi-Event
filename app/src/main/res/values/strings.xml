@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Epi-Event</string>
+    <string name="no_account">Don\'t have a account?</string>
+    <string name="click_here_to_verify"><i><u><![CDATA[<<click to resend verification>>]]></u></i></string>
+</resources>

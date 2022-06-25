@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_margin"
+    app:cardBackgroundColor="@color/epi_event_color_item_background"
+    app:cardCornerRadius="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginRight="@dimen/layout_margin"
+        android:layout_marginBottom="@dimen/item_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/event_item_tv_event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event name"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_item_topic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/event_item_tv_event_organiser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event organiser"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_item_detail" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/item_margin"
+                android:layout_marginRight="@dimen/item_margin"
+                android:text="|"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_item_detail" />
+
+            <TextView
+
+                android:id="@+id/event_item_tv_event_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_item_detail" />
+
+        </LinearLayout>
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="2dp"-->
+        <!--            android:background="@color/black" />-->
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "40996872314",
+    "project_id": "epita-event-signup",
+    "storage_bucket": "epita-event-signup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40996872314:android:ad9377f8436676a2f9dbc3",
+        "android_client_info": {
+          "package_name": "com.example.epi_event"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40996872314-0pa3s7rev88o66bu8f19oef4urj6qovu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.epi_event",
+            "certificate_hash": "57290a1eb1ad69b8f8a8cd9b8f5dbab5cad075d5"
+          }
+        },
+        {
+          "client_id": "40996872314-6pdtv2i5bf65od0rg97rntogk28q759h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpmv0BI2szbDCraN2EeEYEj9XwiswIcTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40996872314-6pdtv2i5bf65od0rg97rntogk28q759h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

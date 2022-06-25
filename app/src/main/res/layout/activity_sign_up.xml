@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_bg_normal"
+    android:orientation="vertical"
+    tools:context=".authentication_login_signup.SignUpActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin"
+            android:background="@mipmap/epita_image_logo_foreground"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/activity_signup_tv_title_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Welcome to Epievent"
+                    android:textColor="@color/epi_event_color_title"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/activity_signup_tv_create_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_signup_tv_title_label"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/item_margin"
+                    android:text="Create a new account"
+                    android:textSize="20dp" />
+
+                <!--    Email-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/activity_signup_til_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_signup_tv_create_account"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginBottom="@dimen/item_margin"
+                    app:boxBackgroundColor="@color/epi_event_color_signup_box"
+                    app:boxStrokeColor="#FFF"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <EditText
+                        android:id="@+id/activity_signup_et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--    password-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/activity_signup_til_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_signup_til_email"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/item_margin"
+                    app:boxBackgroundColor="@color/epi_event_color_signup_box"
+                    app:boxStrokeColor="#FFF"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/activity_signup_et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--    user name-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/activity_signup_til_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_signup_til_password"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/item_margin"
+                    app:boxBackgroundColor="@color/epi_event_color_signup_box"
+                    app:boxStrokeColor="#FFF"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <EditText
+                        android:id="@+id/activity_signup_et_user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:hint="User Name"
+                        android:inputType="text"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--epita email-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/activity_signup_til_epita_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/activity_signup_til_user_name"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/item_margin"
+                    app:boxBackgroundColor="@color/epi_event_color_signup_box"
+                    app:boxStrokeColor="#FFF"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <EditText
+                        android:id="@+id/activity_signup_et_epita_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:hint="Epita Email"
+                        android:inputType="textEmailAddress"
+
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--    signup Button-->
+                <Button
+                    android:id="@+id/activity_signup_btn_sign_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_signup_til_epita_email"
+                    android:layout_centerHorizontal="true"
+                    android:text="Sign Up" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
