@@ -1,4 +1,4 @@
-package com.example.epi_event.qrcode
+package com.example.epi_event.test_modules
 
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -13,7 +13,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
 
-class QrCodeGenerater : AppCompatActivity() {
+class TestQrCodeGenerater : AppCompatActivity() {
 
     private lateinit var ivQRCode: ImageView
     private lateinit var etData: EditText

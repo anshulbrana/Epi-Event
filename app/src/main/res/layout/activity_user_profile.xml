@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".user_profile.UserProfile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name: " />
+
+
+            <TextView
+                android:id="@+id/activity_user_profile_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Email: " />
+
+
+            <TextView
+                android:id="@+id/activity_user_profile_user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Epita Email: " />
+
+
+            <TextView
+                android:id="@+id/activity_user_profile_user_epita_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test Epita Email" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
