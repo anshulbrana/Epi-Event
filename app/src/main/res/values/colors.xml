@@ -11,9 +11,12 @@
     <color name="grey">#6A6767</color>
     <color name="txtBackgroundDescription">#E7EDF7</color>
     <color name="epi_event_color_title">#6B11C5</color>
-    <color name="epi_event_color_text">#CC35A9</color>
+    <color name="epi_event_color_text">#000000</color>
     <color name="epi_event_color_signup_box">#BCCBF1</color>
     <color name="epi_event_color_item_background">#ECEEF3</color>
+
+    <color name="authentication_background">#f8f9fd</color>
+
 
     <color name="colorPrimary">#86C442</color>
     <color name="colorPrimaryDark">#00574B</color>

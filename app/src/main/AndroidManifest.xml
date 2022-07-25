@@ -26,6 +26,7 @@
             android:exported="false" />
         <activity
             android:name=".authentication_login_signup.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".test_modules.TestShowAllEvents"

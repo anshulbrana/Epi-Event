@@ -4,8 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/drawable-v24/circle_authentication_design.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable-v24/circle_authentication_design_big.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable-v24/circle_authentication_design_bottom_big.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable-v24/circle_authentication_design_bottom_small.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable-v24/circle_authentication_design_small.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable-v24/circle_authentication_design_top_big.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable-v24/circle_authentication_design_top_small.xml" value="0.1395" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.157" />
         <entry key="app/src/main/res/drawable-v24/layout_bg_normal.xml" value="0.1565" />
+        <entry key="app/src/main/res/drawable-v24/layout_btn.xml" value="0.1395" />
         <entry key="app/src/main/res/drawable/epita_image_logo_background.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_calender_background.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.157" />
@@ -17,7 +25,7 @@
         <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.15559082031250002" />
         <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.19941558837890622" />
         <entry key="app/src/main/res/layout/activity_face_recognition.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3276699029126214" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.35405273437500007" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_qr_code_generater.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_show_all_events.xml" value="0.1" />

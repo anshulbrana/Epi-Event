@@ -4,30 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/authentication_background"
     tools:context=".authentication_login_signup.LoginActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="48dp"
-        android:weightSum="2">
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-20dp"
+                android:layout_marginTop="-40dp"
+                android:clipChildren="false"
+                android:src="@drawable/circle_authentication_design_top_small" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="-170dp"
+                android:layout_marginRight="-280dp"
+                android:clipChildren="false"
+                android:src="@drawable/circle_authentication_design_top_big" />
+
+            <!--            <ImageView-->
+            <!--                android:layout_width="240dp"-->
+            <!--                android:layout_height="240dp"-->
+            <!--                android:layout_centerInParent="true"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:src="@mipmap/epita_image_logo_foreground" />-->
+        </RelativeLayout>
 
         <!--            Text-->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.2"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/epita_image_logo_foreground" />
 
             <TextView
                 android:id="@+id/activity_login_tv_title_label"
@@ -35,9 +58,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="Epievent"
+                android:text="Epi-Event"
                 android:textColor="@color/epi_event_color_text"
-                android:textSize="24dp"
+                android:textSize="28dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,17 +68,17 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_login_tv_title_label"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/layout_margin"
+                android:layout_marginTop="@dimen/item_margin"
                 android:gravity="center"
                 android:text="Discover upcoming events"
-                android:textColor="@color/epi_event_color_text" />
+                android:textColor="@color/epi_event_color_text"
+                android:textSize="18dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/layout_margin"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <!--    Email-->
@@ -65,11 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                app:boxBackgroundColor="#FFF"
-                app:boxStrokeColor="#FFF"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp">
+                android:layout_centerInParent="true">
 
                 <EditText
                     android:id="@+id/activity_login_et_email"
@@ -77,7 +96,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/layout_bg"
                     android:hint="Email"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/layout_margin" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,14 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_login_til_email"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="@dimen/item_margin"
-                android:layout_marginBottom="@dimen/item_margin"
-                app:boxBackgroundColor="#FFF"
-                app:boxStrokeColor="#FFF"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:passwordToggleEnabled="true">
+                android:layout_centerInParent="true">
 
                 <EditText
                     android:id="@+id/activity_login_et_password"
@@ -104,7 +117,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/layout_bg"
                     android:hint="Password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:padding="@dimen/layout_margin" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,7 +129,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_login_til_email"
                 android:layout_gravity="center"
-                android:text="LOGIN" />
+                android:layout_marginTop="@dimen/layout_margin"
+                android:background="@drawable/layout_btn"
+                android:elevation="8dp"
+                android:paddingLeft="@dimen/button_text_margin"
+                android:paddingRight="@dimen/button_text_margin"
+                android:text="LOGIN"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,6 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/layout_margin"
                     android:layout_marginBottom="@dimen/item_margin"
                     android:text="Forget password"
                     android:textColor="@color/epi_event_color_title"
@@ -173,6 +195,37 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-40dp"
+                android:layout_marginTop="20dp"
+                android:clipChildren="false"
+                android:src="@drawable/circle_authentication_design_bottom_big" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="-280dp"
+                android:clipChildren="false"
+                android:src="@drawable/circle_authentication_design_bottom_small" />
+
+            <!--            <ImageView-->
+            <!--                android:layout_width="240dp"-->
+            <!--                android:layout_height="240dp"-->
+            <!--                android:layout_centerInParent="true"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:src="@mipmap/epita_image_logo_foreground" />-->
+        </RelativeLayout>
+
     </LinearLayout>
 
 

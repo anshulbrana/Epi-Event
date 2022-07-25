@@ -48,8 +48,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //configure ActionBar
-        actionBar = supportActionBar!!
-        actionBar.title = "Login"
+//        actionBar = supportActionBar!!
+//        actionBar.title = "Login"
 
         //Configure progress dialog
         progressDialog = ProgressDialog(this)

@@ -4,6 +4,7 @@
     <dimen name="item_margin">10dp</dimen>
     <dimen name="text_item_topic">18dp</dimen>
     <dimen name="text_item_detail">14dp</dimen>
+    <dimen name="button_text_margin">72dp</dimen>
 
 
 </resources>
