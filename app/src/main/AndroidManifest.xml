@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EpiEvent">
         <activity
-            android:name=".ProfileActivity"
+            android:name=".qrcode.QrCodeGenerater"
             android:exported="false" />
         <activity
             android:name=".authentication_login_signup.ChangePasswordActivity"
@@ -40,11 +40,11 @@
         <!-- android:exported="false" /> -->
 
         <activity
-            android:name=".qrcode.QrCodeGenerater"
+            android:name=".ProfileActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

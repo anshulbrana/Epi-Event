@@ -167,6 +167,7 @@ class LoginActivity : AppCompatActivity() {
 
                 //open profile
                 val intent = Intent(this, ProfileActivity::class.java)
+                intent.putExtra("userEmailPass",email.toString())
                 startActivity(intent)
                 finish()
 

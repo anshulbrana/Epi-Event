@@ -15,6 +15,10 @@
     <color name="epi_event_color_signup_box">#BCCBF1</color>
     <color name="epi_event_color_item_background">#ECEEF3</color>
 
+    <color name="colorPrimary">#86C442</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
 
 
 </resources>

@@ -246,10 +246,13 @@
 
 
         <Button
+            android:layout_margin="@dimen/item_margin"
             android:id="@+id/activity_event_detail_btn_edit_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Event" />
+            android:text="Edit Event"
+            android:layout_gravity="end"
+            />
     </LinearLayout>
 
 </ScrollView>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_admin_profile"
+                android:icon="@mipmap/epita_image_logo"
+                android:title="Profile" />
+
+            <item
+                android:id="@+id/nav_admin_add_event"
+                android:layout_height="match_parent"
+                android:icon="@mipmap/epita_image_logo"
+                android:title="Create Event"
+                />
+
+            <item
+                android:id="@+id/nav_admin_change_password"
+                android:layout_height="match_parent"
+                android:icon="@mipmap/epita_image_logo"
+                android:title="Change Password"
+                />
+
+            <item
+                android:id="@+id/nav_admin_sign_out"
+                android:icon="@mipmap/epita_image_logo"
+                android:title="Sign Out" />
+
+        </group>
+
+        <item android:title="Communicate">
+            <menu>
+                <item
+                    android:id="@+id/nav_aboutus"
+                    android:icon="@mipmap/epita_image_logo"
+                    android:title="About Us" />
+            </menu>
+        </item>
+</menu>

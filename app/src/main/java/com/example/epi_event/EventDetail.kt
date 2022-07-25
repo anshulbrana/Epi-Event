@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -31,6 +32,8 @@ class EventDetail : AppCompatActivity() {
 
     //ActionBar
     private lateinit var actionBar: ActionBar
+
+    private lateinit var isAdmin: String
 
     //Event details To send for edit
     private lateinit var eventDetailSendName: String
@@ -61,10 +64,16 @@ class EventDetail : AppCompatActivity() {
 
         //Get Event Name
         EventNameClicked = intent.getStringExtra("eventNamePass").toString()
+
+        //Check if user is admin or not
+        isAdmin = intent.getStringExtra("canEdit").toString()
+        Log.d("canEdit", isAdmin)
         Log.d("receivedEventName", "" + EventNameClicked)
 
         bindActivity()
-
+        if(isAdmin == "true"){
+            btnEditEvent.visibility = View.VISIBLE
+        }
     }
 
     private fun bindActivity() {
@@ -83,7 +92,6 @@ class EventDetail : AppCompatActivity() {
 
         getEventDetails()
         getImage()
-
 
         btnEditEvent.setOnClickListener {
             val intent = Intent(this, CreateEventActivity::class.java)
