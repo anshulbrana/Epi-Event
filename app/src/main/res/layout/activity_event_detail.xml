@@ -237,6 +237,55 @@
                             android:textColor="@color/grey" />
 
                     </LinearLayout>
+
+                    <!--                    Pre-Registration-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/item_margin"
+                            android:text="Pre-Registration: "
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/activity_event_detail_tv_pre_registration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/grey" />
+
+                        <Button
+                            android:id="@+id/activity_qr_code_generate_btn_create"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/item_margin"
+                            android:text="Generate"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/activity_event_detail_iv_qr_code"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
 
@@ -246,13 +295,12 @@
 
 
         <Button
-            android:layout_margin="@dimen/item_margin"
             android:id="@+id/activity_event_detail_btn_edit_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Event"
             android:layout_gravity="end"
-            />
+            android:layout_margin="@dimen/item_margin"
+            android:text="Edit Event" />
     </LinearLayout>
 
 </ScrollView>

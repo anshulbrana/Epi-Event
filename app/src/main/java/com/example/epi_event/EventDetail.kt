@@ -3,6 +3,7 @@ package com.example.epi_event
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,9 @@ import com.example.epi_event.create_event.CreateEventActivity
 import com.example.epi_event.databinding.ActivityEventDetailBinding
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.WriterException
+import com.google.zxing.qrcode.QRCodeWriter
 import java.io.File
 
 
@@ -34,6 +38,7 @@ class EventDetail : AppCompatActivity() {
     private lateinit var actionBar: ActionBar
 
     private lateinit var isAdmin: String
+    private lateinit var userEmail: String
 
     //Event details To send for edit
     private lateinit var eventDetailSendName: String
@@ -43,6 +48,7 @@ class EventDetail : AppCompatActivity() {
     private lateinit var eventDetailSendDescription: String
     private lateinit var eventDetailSendLocation: String
     private lateinit var eventDetailSendType: String
+    private lateinit var eventDetailSendPreRegistration: String
 
 
     //Set Global
@@ -54,7 +60,10 @@ class EventDetail : AppCompatActivity() {
     private lateinit var tvEventLocation: TextView
     private lateinit var tvEventType: TextView
     private lateinit var btnEditEvent: Button
+    private lateinit var tvEventPreRegistration: TextView
     private lateinit var eventDetailEventNameSend: String
+    private lateinit var btnGenerateQr: Button
+    private lateinit var ivQr: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,8 +79,12 @@ class EventDetail : AppCompatActivity() {
         Log.d("canEdit", isAdmin)
         Log.d("receivedEventName", "" + EventNameClicked)
 
+        userEmail = intent.getStringExtra("userNamePass").toString()
+        Log.d("receivedUserName", "" + userEmail)
+
+
         bindActivity()
-        if(isAdmin == "true"){
+        if (isAdmin == "true") {
             btnEditEvent.visibility = View.VISIBLE
         }
     }
@@ -86,7 +99,9 @@ class EventDetail : AppCompatActivity() {
         tvEventLocation = findViewById(R.id.activity_event_detail_tv_location)
         tvEventType = findViewById(R.id.activity_event_detail_tv_type)
         btnEditEvent = findViewById(R.id.activity_event_detail_btn_edit_event)
-
+        tvEventPreRegistration = findViewById(R.id.activity_event_detail_tv_pre_registration)
+        btnGenerateQr = findViewById(R.id.activity_qr_code_generate_btn_create)
+        ivQr = findViewById(R.id.activity_event_detail_iv_qr_code)
 
 //        getEventData()
 
@@ -103,7 +118,7 @@ class EventDetail : AppCompatActivity() {
             intent.putExtra("EventDetailEventLocationSend", eventDetailSendLocation)
             intent.putExtra("EventDetailEventDescriptionSend", eventDetailSendDescription)
             intent.putExtra("EventDetailEventTypeSend", eventDetailSendType)
-
+            intent.putExtra("EventDetailEventPreRegistrationSend", eventDetailSendPreRegistration)
 
             Log.d("eventDetailEventName", EventNameClicked)
 
@@ -162,6 +177,8 @@ class EventDetail : AppCompatActivity() {
                 val eventLocation =
                     snapshot.child("eventLocation").getValue<String>(String::class.java)
                 val eventType = snapshot.child("eventType").getValue<String>(String::class.java)
+                val eventPreRegistration =
+                    snapshot.child("eventPreRegister").getValue<String>(String::class.java)
 
                 tvEventName.text = eventName
                 tvEventOrganiser.text = eventOrganiser
@@ -170,6 +187,7 @@ class EventDetail : AppCompatActivity() {
                 tvEventDescription.text = eventDescription
                 tvEventLocation.text = eventLocation
                 tvEventType.text = eventType
+                tvEventPreRegistration.text = eventPreRegistration
 
 
 //                eventDetailEventNameSend = eventName.toString()
@@ -182,6 +200,45 @@ class EventDetail : AppCompatActivity() {
                 eventDetailSendDescription = eventDescription.toString()
                 eventDetailSendType = eventType.toString()
                 eventDetailSendLocation = eventLocation.toString()
+                eventDetailSendPreRegistration = eventPreRegistration.toString()
+
+                if (eventDetailSendPreRegistration == "Yes") {
+
+                    btnGenerateQr.visibility = View.VISIBLE
+
+                }
+
+                btnGenerateQr.setOnClickListener {
+                    ivQr.visibility = View.VISIBLE
+                    val writer = QRCodeWriter()
+                    try {
+                        val bitMatrix =
+                            writer.encode("Event name: $eventName\n" +
+                                    "Event date: $eventDate\n" +
+                                    "Event time: $eventTime\n" +
+                                    "Event organiser: $eventOrganiser\n" +
+                                    "Registered user email: $userEmail\n",
+                                BarcodeFormat.QR_CODE,
+                                512,
+                                512)
+                        val width = bitMatrix.width
+                        val height = bitMatrix.height
+                        val bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+                        for (x in 0 until width) {
+                            for (y in 0 until height) {
+                                bmp.setPixel(x,
+                                    y,
+                                    if (bitMatrix[x, y]) Color.BLACK else Color.WHITE)
+                            }
+                        }
+
+                        ivQr.setImageBitmap(bmp)
+
+                    } catch (e: WriterException) {
+                        e.printStackTrace()
+                    }
+                }
+
 
             }
 

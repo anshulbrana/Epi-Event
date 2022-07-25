@@ -33,7 +33,9 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     private lateinit var navigationView: NavigationView
     private lateinit var tvEmailVerification: TextView
+    private lateinit var tvEmailResend: TextView
     private lateinit var tvEmail: TextView
+    private lateinit var getUserEmail: String
 
     //Admin lists
     private var adminList: MutableList<String> = mutableListOf()
@@ -108,6 +110,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         //find id
         tvEmailVerification = findViewById(R.id.activity_profile_tv_email_not_verified)
+        tvEmailResend = findViewById(R.id.activity_profile_tv_click_to_verify)
         tvEmail = findViewById(R.id.activity_profile_tv_email)
 
 
@@ -181,6 +184,8 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
                         val intent: Intent = Intent(this@ProfileActivity, EventDetail::class.java)
                         intent.putExtra("eventNamePass", eventNameClicked)
+                        intent.putExtra("userNamePass", getUserEmail)
+                        Log.d("testUsername", getUserEmail)
                         if (adminList.contains(userEmail)) {
                             intent.putExtra("canEdit", "true")
                         } else {
@@ -218,7 +223,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 Log.d("insideCheck", "done")
 
                 tvEmailVerification.visibility = View.GONE
-                tvEmailVerification.visibility = View.GONE
+                tvEmailResend.visibility = View.GONE
 
             } else {
 
@@ -267,10 +272,10 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val firebaseUser = firebaseAuth.currentUser
         if (firebaseUser != null) {
             //User is already logged in
-            val email = firebaseUser.email
+            getUserEmail = firebaseUser.email.toString()
 
             //set username
-            tvEmail.text = email
+            tvEmail.text = getUserEmail
 
         } else {
             //user is null so not signed in

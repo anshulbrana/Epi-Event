@@ -8,4 +8,5 @@ data class CreateEvent(
     val eventDescription: String? = null,
     val eventLocation: String? = null,
     val eventType: String? = null,
+    val eventPreRegister: String? = null,
 )

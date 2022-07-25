@@ -13,6 +13,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -61,6 +62,7 @@ class CreateEventActivity : AppCompatActivity() {
     private lateinit var eventDetailEventLocation: String
     private lateinit var eventDetailEventDescription: String
     private lateinit var eventDetailEventType: String
+    private lateinit var eventDetailPreRegister: String
 
 
     //Get edit text data
@@ -71,6 +73,7 @@ class CreateEventActivity : AppCompatActivity() {
     private var eventDescription = ""
     private var eventLocation = ""
     private var eventType = ""
+    private var eventPreRegister = ""
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -100,6 +103,8 @@ class CreateEventActivity : AppCompatActivity() {
 
         eventDetailEventType = intent.getStringExtra("EventDetailEventTypeSend").toString()
 
+        eventDetailPreRegister = intent.getStringExtra("EventDetailEventPreRegistrationSend").toString()
+
 
         Log.d("receivedNameEvent", eventDetailEventName)
 
@@ -111,8 +116,11 @@ class CreateEventActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun bindActivity() {
-        actionBar = supportActionBar!!
-        actionBar.title = "Create Event"
+//        actionBar = supportActionBar!!
+//        actionBar.title = "Create Event"
+
+        //get switch id
+//        switchPreRegister = binding.activityCreateEventSwitchPreRegister
 
         //Configure progress dialog
         progressDialog = ProgressDialog(this)
@@ -127,7 +135,7 @@ class CreateEventActivity : AppCompatActivity() {
 
         }
 
-        binding.activityCreateEventIvDeleteEvent.setOnClickListener{
+        binding.activityCreateEventIvDeleteEvent.setOnClickListener {
             deleteData()
 
         }
@@ -145,6 +153,18 @@ class CreateEventActivity : AppCompatActivity() {
             setTimeField()
         }
 
+        //            get pre-register switch
+
+        binding.activityCreateEventSwitchPreRegister.setOnClickListener {
+            if (binding.activityCreateEventSwitchPreRegister.isChecked) {
+                binding.activityCreateEventTvPreRegister.text = "Yes"
+                Toast.makeText(this, "Pre-Registration enabled", Toast.LENGTH_SHORT).show();
+            } else {
+                binding.activityCreateEventTvPreRegister.text = "No"
+                Toast.makeText(this, "Pre-Registration disabled", Toast.LENGTH_SHORT).show();
+            }
+        }
+
         //submit Event Data
         binding.activityCreateEventBtnSubmitEvent.setOnClickListener {
             //Get Data
@@ -159,21 +179,20 @@ class CreateEventActivity : AppCompatActivity() {
             selectImage()
         }
 
-
     }
 
     private fun deleteData() {
-        Log.d("nameDelete",eventDetailEventName)
-         databaseReference =
-                FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
-                    .getReference("Events/").child(eventDetailEventName)
+        Log.d("nameDelete", eventDetailEventName)
+        databaseReference =
+            FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("Events/").child(eventDetailEventName)
 
-            databaseReference.removeValue()
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-            finish()
+        databaseReference.removeValue()
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
+        finish()
 
-        Toast.makeText(this, "Deleted event", Toast.LENGTH_SHORT ).show()
+        Toast.makeText(this, "Deleted event", Toast.LENGTH_SHORT).show()
 
 
     }
@@ -242,6 +261,7 @@ class CreateEventActivity : AppCompatActivity() {
         eventDescription = binding.activityCreateEventEtDescription.text.toString().trim()
         eventLocation = binding.activityCreateEventEtLocation.text.toString().trim()
         eventType = binding.activityCreateEventEtType.text.toString().trim()
+        eventPreRegister = binding.activityCreateEventTvPreRegister.text.toString().trim()
 
         //Validate Data
 
@@ -287,7 +307,6 @@ class CreateEventActivity : AppCompatActivity() {
         } else if (imageUri == null) {
             Toast.makeText(this, "Please select image of the event", Toast.LENGTH_SHORT).show()
         } else {
-
             progressDialog.show()
 
             saveEventData()
@@ -316,7 +335,8 @@ class CreateEventActivity : AppCompatActivity() {
             eventTime,
             eventDescription,
             eventLocation,
-            eventType)
+            eventType,
+            eventPreRegister)
 
         databaseReference =
             FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -326,7 +346,6 @@ class CreateEventActivity : AppCompatActivity() {
             .addOnSuccessListener {
 
                 saveImageToFirebase(imageUri!!)
-
                 Toast.makeText(this, "saved event", Toast.LENGTH_SHORT).show()
 
             }

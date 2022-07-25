@@ -259,6 +259,32 @@
                             android:hint="Event Type"
                             android:inputType="text" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                        <Switch
+                            android:id="@+id/activity_create_event_switch_pre_register"
+                            android:layout_width="250dp"
+                            android:layout_height="50dp"
+                            android:text="Allow Pre-Register "
+                            android:switchMinWidth="48dp"
+                            android:textColor="@color/black"
+                            android:thumbTint="@color/black"
+                            android:trackTint="@color/teal_700"
+                            >
+                        </Switch>
+                            <TextView
+                                android:id="@+id/activity_create_event_tv_pre_register"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="@dimen/item_margin"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
