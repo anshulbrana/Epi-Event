@@ -1,11 +1,11 @@
 package com.example.epi_event
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Matrix
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -16,12 +16,18 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.epi_event.create_event.CreateEventActivity
 import com.example.epi_event.databinding.ActivityEventDetailBinding
+import com.example.epi_event.qr_code.QrCode
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
 import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
+import java.sql.Date
+import java.text.SimpleDateFormat
 
 
 class EventDetail : AppCompatActivity() {
@@ -50,6 +56,8 @@ class EventDetail : AppCompatActivity() {
     private lateinit var eventDetailSendType: String
     private lateinit var eventDetailSendPreRegistration: String
 
+    //For random 21 digit authentication code
+    private lateinit var randomString: String
 
     //Set Global
     private lateinit var tvEventName: TextView
@@ -104,6 +112,9 @@ class EventDetail : AppCompatActivity() {
         ivQr = findViewById(R.id.activity_event_detail_iv_qr_code)
 
 //        getEventData()
+        randomString = getRandomString(21)
+//        println(randomString)
+        Log.d("randomCode", randomString)
 
         getEventDetails()
         getImage()
@@ -157,6 +168,7 @@ class EventDetail : AppCompatActivity() {
         matrix.postRotate(angle)
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
     }
+
 
     private fun getEventDetails() {
         databaseReference =
@@ -217,7 +229,8 @@ class EventDetail : AppCompatActivity() {
                                     "Event date: $eventDate\n" +
                                     "Event time: $eventTime\n" +
                                     "Event organiser: $eventOrganiser\n" +
-                                    "Registered user email: $userEmail\n",
+                                    "Registered user email: $userEmail\n" +
+                                    "Registration number: $randomString",
                                 BarcodeFormat.QR_CODE,
                                 512,
                                 512)
@@ -234,6 +247,34 @@ class EventDetail : AppCompatActivity() {
 
                         ivQr.setImageBitmap(bmp)
 
+                        //Save event data
+
+                        val saveQrDetails = QrCode(
+                            eventName,
+                            eventDate,
+                            eventTime,
+                            eventOrganiser,
+                            userEmail,
+                            randomString)
+
+                        databaseReference =
+                            FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
+                                .getReference("Registration").child(eventName.toString())
+
+                        databaseReference.child(randomString).setValue(saveQrDetails)
+                            .addOnSuccessListener {
+//                                Toast.makeText(this@EventDetail,
+//                                    "Event registration successful",
+//                                    Toast.LENGTH_SHORT).show()
+                                downloadQR()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this@EventDetail,
+                                    "Registration error ${e.message}",
+                                    Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+
                     } catch (e: WriterException) {
                         e.printStackTrace()
                     }
@@ -249,33 +290,93 @@ class EventDetail : AppCompatActivity() {
         })
     }
 
+    private fun downloadQR() {
 
-    private fun getEventData() {
-        databaseReference =
-            FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference("Events").child(EventNameClicked)
+        var fileOutputStream: FileOutputStream
+        val file: File = getdisc()
+        if (!file.exists() && !file.mkdirs()) {
+            Toast.makeText(applicationContext,
+                "sorry can not make directory",
+                Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val name = "img${tvEventName.text}"
+        val file_name: String = file.getAbsolutePath().toString() + "/" + name +".jpeg"
+        val new_file = File(file_name)
+
+        try {
+            fileOutputStream = FileOutputStream(new_file)
+            val bitmap = viewToBitmap(ivQr, ivQr.getWidth(), ivQr.getHeight())
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+            Toast.makeText(applicationContext, "QR code saved to gallery", Toast.LENGTH_LONG).show()
+            fileOutputStream.flush()
+            fileOutputStream.close()
+        } catch (e: FileNotFoundException) {
+            Toast.makeText(this,e.message, Toast.LENGTH_SHORT).show()
+            Log.d("errorFNF", e.message.toString())
+        } catch (e: IOException) {
+            Toast.makeText(this,e.message, Toast.LENGTH_SHORT).show()
+            Log.d("errorIOE", e.message.toString())
+
+        }
+        refreshGallary(file)
+
+
+    }
+
+    companion object {
+        fun viewToBitmap(view: View?, widh: Int, hight: Int): Bitmap {
+            val bitmap = Bitmap.createBitmap(widh, hight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            if (view != null) {
+                view.draw(canvas)
+            }
+            return bitmap
+        }
+    }
+
+    private fun refreshGallary(file: File) {
+        val i = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+        i.data = Uri.fromFile(file)
+        sendBroadcast(i)
+    }
+
+    private fun getdisc(): File {
+        val file: File =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+        return File(file, "Epievent")
+    }
 
 
 
-        databaseReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (userSnapshot in snapshot.children) {
 
-                        Log.d("clickedChildrenName1", EventNameClicked)
+private fun getEventData() {
+    databaseReference =
+        FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference("Events").child(EventNameClicked)
 
-                        if (userSnapshot.hasChild(EventNameClicked)) {
 
-                            userSnapshot.child(EventNameClicked)
 
-                            tvEventName.text =
-                                userSnapshot.child(EventNameClicked).childrenCount.toString()
-                        }
+    databaseReference.addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            if (snapshot.exists()) {
+                for (userSnapshot in snapshot.children) {
+
+                    Log.d("clickedChildrenName1", EventNameClicked)
+
+                    if (userSnapshot.hasChild(EventNameClicked)) {
+
+                        userSnapshot.child(EventNameClicked)
+
+                        tvEventName.text =
+                            userSnapshot.child(EventNameClicked).childrenCount.toString()
+                    }
 
 
 //                        val event = userSnapshot.getValue(EventObject::class.java)
 //                        eventsArrayList.add(event!!)
-                    }
+                }
 //
 //                    eventRecyclerView.adapter =
 //                        EventRecyclerViewAdapter(eventsArrayList,
@@ -283,14 +384,21 @@ class EventDetail : AppCompatActivity() {
 //                            onItemClickListener)
 
 
-                }
             }
+        }
 
-            override fun onCancelled(error: DatabaseError) {
+        override fun onCancelled(error: DatabaseError) {
 
-            }
+        }
 
-        })
-    }
+    })
+}
+
+private fun getRandomString(length: Int): String {
+    val charset = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz0123456789"
+    return (1..length)
+        .map { charset.random() }
+        .joinToString("")
+}
 
 }
