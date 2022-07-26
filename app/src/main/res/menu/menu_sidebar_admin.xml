@@ -17,6 +17,13 @@
                 />
 
             <item
+                android:id="@+id/nav_admin_qr_code_scanner"
+                android:layout_height="match_parent"
+                android:icon="@mipmap/epita_image_logo"
+                android:title="QR Code Scanner"
+                />
+
+            <item
                 android:id="@+id/nav_admin_change_password"
                 android:layout_height="match_parent"
                 android:icon="@mipmap/epita_image_logo"

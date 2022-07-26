@@ -15,8 +15,11 @@
         <entry key="app/src/main/res/drawable-v24/layout_bg_normal.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable-v24/layout_btn.xml" value="0.1395" />
         <entry key="app/src/main/res/drawable/epita_image_logo_background.xml" value="0.1565" />
+        <entry key="app/src/main/res/drawable/flash_button_background.xml" value="0.186" />
         <entry key="app/src/main/res/drawable/ic_calender_background.xml" value="0.1565" />
+        <entry key="app/src/main/res/drawable/ic_copy.xml" value="0.186" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.157" />
+        <entry key="app/src/main/res/drawable/ic_round_flash_off.xml" value="0.186" />
         <entry key="app/src/main/res/drawable/ic_sort_black_24dp.xml" value="0.101" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.1545" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.186" />
@@ -28,6 +31,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35405273437500007" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_qr_code_generater.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_qr_scan.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/activity_show_all_events.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.24546610514322914" />
         <entry key="app/src/main/res/layout/activity_test_database.xml" value="0.19114583333333332" />
@@ -35,10 +39,12 @@
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.28689982096354166" />
         <entry key="app/src/main/res/layout/event_item.xml" value="0.3386625320780238" />
+        <entry key="app/src/main/res/layout/fragment_qr_result.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/menu/menu_login.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/menu/menu_sidebar.xml" value="0.30512820512820515" />
         <entry key="app/src/main/res/menu/menu_sidebar_admin.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/menu/menu_sidebar_user.xml" value="0.20625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/epita_image_logo.xml" value="0.186" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_calender.xml" value="0.1545" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_calender_round.xml" value="0.1545" />

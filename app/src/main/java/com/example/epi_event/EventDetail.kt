@@ -17,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.epi_event.create_event.CreateEventActivity
 import com.example.epi_event.databinding.ActivityEventDetailBinding
 import com.example.epi_event.qr_code.QrCode
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
@@ -225,12 +227,12 @@ class EventDetail : AppCompatActivity() {
                     val writer = QRCodeWriter()
                     try {
                         val bitMatrix =
-                            writer.encode("Event name: $eventName\n" +
-                                    "Event date: $eventDate\n" +
-                                    "Event time: $eventTime\n" +
-                                    "Event organiser: $eventOrganiser\n" +
-                                    "Registered user email: $userEmail\n" +
-                                    "Registration number: $randomString",
+                            writer.encode("Event name:$eventName\n" +
+                                    "Event date:$eventDate\n" +
+                                    "Event time:$eventTime\n" +
+                                    "Event organiser:$eventOrganiser\n" +
+                                    "Registered user email:$userEmail\n" +
+                                    "Registration number:$randomString",
                                 BarcodeFormat.QR_CODE,
                                 512,
                                 512)
@@ -257,11 +259,15 @@ class EventDetail : AppCompatActivity() {
                             userEmail,
                             randomString)
 
+                        var currentUserId: String =
+                            FirebaseAuth.getInstance().currentUser!!.uid.toString();
+                        Log.d("testFirebaseID", currentUserId)
+
                         databaseReference =
                             FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
                                 .getReference("Registration").child(eventName.toString())
 
-                        databaseReference.child(randomString).setValue(saveQrDetails)
+                        databaseReference.child(currentUserId).setValue(saveQrDetails)
                             .addOnSuccessListener {
 //                                Toast.makeText(this@EventDetail,
 //                                    "Event registration successful",
@@ -302,7 +308,7 @@ class EventDetail : AppCompatActivity() {
         }
 
         val name = "img${tvEventName.text}"
-        val file_name: String = file.getAbsolutePath().toString() + "/" + name +".jpeg"
+        val file_name: String = file.getAbsolutePath().toString() + "/" + name + ".jpeg"
         val new_file = File(file_name)
 
         try {
@@ -313,10 +319,10 @@ class EventDetail : AppCompatActivity() {
             fileOutputStream.flush()
             fileOutputStream.close()
         } catch (e: FileNotFoundException) {
-            Toast.makeText(this,e.message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             Log.d("errorFNF", e.message.toString())
         } catch (e: IOException) {
-            Toast.makeText(this,e.message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             Log.d("errorIOE", e.message.toString())
 
         }
@@ -349,34 +355,32 @@ class EventDetail : AppCompatActivity() {
     }
 
 
-
-
-private fun getEventData() {
-    databaseReference =
-        FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
-            .getReference("Events").child(EventNameClicked)
+    private fun getEventData() {
+        databaseReference =
+            FirebaseDatabase.getInstance("https://epita-event-signup-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("Events").child(EventNameClicked)
 
 
 
-    databaseReference.addValueEventListener(object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            if (snapshot.exists()) {
-                for (userSnapshot in snapshot.children) {
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
 
-                    Log.d("clickedChildrenName1", EventNameClicked)
+                        Log.d("clickedChildrenName1", EventNameClicked)
 
-                    if (userSnapshot.hasChild(EventNameClicked)) {
+                        if (userSnapshot.hasChild(EventNameClicked)) {
 
-                        userSnapshot.child(EventNameClicked)
+                            userSnapshot.child(EventNameClicked)
 
-                        tvEventName.text =
-                            userSnapshot.child(EventNameClicked).childrenCount.toString()
-                    }
+                            tvEventName.text =
+                                userSnapshot.child(EventNameClicked).childrenCount.toString()
+                        }
 
 
 //                        val event = userSnapshot.getValue(EventObject::class.java)
 //                        eventsArrayList.add(event!!)
-                }
+                    }
 //
 //                    eventRecyclerView.adapter =
 //                        EventRecyclerViewAdapter(eventsArrayList,
@@ -384,21 +388,21 @@ private fun getEventData() {
 //                            onItemClickListener)
 
 
+                }
             }
-        }
 
-        override fun onCancelled(error: DatabaseError) {
+            override fun onCancelled(error: DatabaseError) {
 
-        }
+            }
 
-    })
-}
+        })
+    }
 
-private fun getRandomString(length: Int): String {
-    val charset = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz0123456789"
-    return (1..length)
-        .map { charset.random() }
-        .joinToString("")
-}
+    private fun getRandomString(length: Int): String {
+        val charset = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz0123456789"
+        return (1..length)
+            .map { charset.random() }
+            .joinToString("")
+    }
 
 }

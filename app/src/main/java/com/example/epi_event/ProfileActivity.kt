@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.epi_event.authentication_login_signup.ChangePasswordActivity
 import com.example.epi_event.authentication_login_signup.LoginActivity
 import com.example.epi_event.create_event.CreateEventActivity
+import com.example.epi_event.qr_code.QrScan
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -29,7 +30,6 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
 
     //ViewBinding
-//    private lateinit var binding: ActivityProfileBinding
 
     private lateinit var navigationView: NavigationView
     private lateinit var tvEmailVerification: TextView
@@ -44,7 +44,6 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     //ActionBar
     private lateinit var actionBar: ActionBar
-
     private lateinit var drawer: DrawerLayout
 
 
@@ -69,11 +68,9 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-//        binding = ActivityProfileBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
+        //Adding admin
 
-        adminList.add("gam3ame@gmail.com")
-        adminList.add("anshulbrana@gmail.com")
+        addAdmin()
 
         //Get admin email
         userEmail = intent.getStringExtra("userEmailPass").toString()
@@ -87,16 +84,20 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         if (adminList.contains(userEmail)) {
             navigationView.menu.clear()
             navigationView.inflateMenu(R.menu.menu_sidebar_admin)
-//            val displayUserName: TextView
-//            var userNameBar: TextView
-//            displayUserName = findViewById(R.id.displayUserName) as TextView
-//            displayUserName.text = "Hello, $restoredText"
+
         } else {
             navigationView.menu.clear()
             navigationView.inflateMenu(R.menu.menu_sidebar_user)
         }
 
 
+    }
+
+    private fun addAdmin() {
+        //adding admin
+
+        adminList.add("gam3ame@gmail.com")
+        adminList.add("anshulbrana@gmail.com")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -113,7 +114,6 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         tvEmailResend = findViewById(R.id.activity_profile_tv_click_to_verify)
         tvEmail = findViewById(R.id.activity_profile_tv_email)
 
-
 //Navigation view
         val toolbar: Toolbar = findViewById(R.id.app_bar_main_toolbar)
 //        setSupportActionBar(toolbar)
@@ -129,15 +129,8 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
-//        supportActionBar!!.setHomeButtonEnabled(true)
-//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_sort_black_24dp)
         navigationView.setNavigationItemSelectedListener(this)
 
-
-        //configure ActionBar
-//        actionBar = supportActionBar!!
-//        actionBar.title = "Profile"
 
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance()
@@ -251,14 +244,6 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
                     }
 
-                    //Reload activity after 2 minute
-
-//                    val handler = Handler()
-//                    handler.postDelayed(Runnable {
-//                        finish()
-//                        startActivity(intent);
-//                    }, 120000)
-
                 }
 
             }
@@ -304,6 +289,10 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         } else if (id == R.id.nav_admin_add_event) {
             //For adding event
             val intent = Intent(this, CreateEventActivity::class.java)
+            startActivity(intent)
+        } else if (id == R.id.nav_admin_qr_code_scanner) {
+            //For opening scanner
+            val intent = Intent(this, QrScan::class.java)
             startActivity(intent)
         }
 

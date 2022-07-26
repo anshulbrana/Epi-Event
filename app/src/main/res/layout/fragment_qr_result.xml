@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:hint="Result"
+        app:hintTextColor="@android:color/black"
+        app:boxStrokeColor="@android:color/black"
+        android:layout_margin="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtResult"
+            android:enabled="false"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Validation status: "
+        android:textSize="18dp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/layout_margin"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="valid"
+            android:textColor="@color/black"
+            android:textStyle="italic"
+            android:id="@+id/fragment_qr_result_tv_verification"
+            android:textSize="18dp"
+            android:layout_marginBottom="@dimen/layout_margin"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCopy"
+        android:text="Copy"
+        android:insetTop="0dp"
+        app:cornerRadius="0dp"
+        android:insetBottom="0dp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:iconGravity="textStart"
+        app:icon="@drawable/ic_copy"
+        android:layout_width="match_parent"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
